@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<meta name="referrer" content="no-referrer">
+<title>Instagram bağlantısı · AI Ofis</title>
+<link rel="stylesheet" href="stil.css">
+</head>
+<body>
+<main>
+<h1>Instagram bağlantısı</h1>
+<p class="soluk">Bu sayfa yalnız adresteki tek kullanımlık kodu gösterir; hiçbir yere göndermez.</p>
+<div class="kart">
+<p id="durum">Kod aranıyor…</p>
+<p><code id="kod" style="word-break:break-all;font-size:1.05rem"></code></p>
+<p><button id="kopyala" hidden style="font:inherit;padding:10px 18px;border-radius:10px;border:0;background:var(--vurgu);color:#fff">Kodu kopyala</button></p>
+</div>
+<p>Kodu kopyala ve AI Ofis sohbetine yapıştır. Kod bir saat içinde ve yalnız bir kez kullanılabilir.</p>
+<footer>© 2026 datbo · <a href="./">Ana sayfa</a> · <a href="gizlilik.html">Gizlilik</a></footer>
+</main>
+<script>
+(function () {
+  var q = new URLSearchParams(location.search);
+  var durum = document.getElementById('durum');
+  if (q.get('error')) { durum.textContent = 'İzin verilmedi: ' + (q.get('error_description') || q.get('error')); return; }
+  var kod = (q.get('code') || '').replace(/#_$/, '');
+  if (!kod) { durum.textContent = 'Adreste kod yok.'; return; }
+  durum.textContent = 'Kodun hazır:';
+  document.getElementById('kod').textContent = kod;
+  var b = document.getElementById('kopyala');
+  b.hidden = false;
+  b.onclick = function () {
+    navigator.clipboard.writeText(kod).then(function () { b.textContent = 'Kopyalandı'; });
+  };
+})();
+</script>
+</body>
+</html>
